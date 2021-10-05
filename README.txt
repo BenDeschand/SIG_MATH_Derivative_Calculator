@@ -27,3 +27,4 @@ Trigonmetric check
 Solve method
 Power rule
 Hello World
+Welcome to McDonalds
