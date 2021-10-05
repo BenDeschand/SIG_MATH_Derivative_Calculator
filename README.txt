@@ -10,7 +10,7 @@ Class deriv
 	Variable vector
 	Nested variable vector
 	Nested tree
-	I own SigMath
+	Danny
 	
 	Parse equation
 Look for variable
