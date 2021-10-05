@@ -24,3 +24,4 @@ Trigonmetric check
 Solve method
 Power rule
 Hello World
+hihi
