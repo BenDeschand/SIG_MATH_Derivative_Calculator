@@ -28,3 +28,4 @@ Solve method
 Power rule
 Hello World
 adam was here
+adam2
