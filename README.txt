@@ -10,6 +10,7 @@ Class deriv
 	Variable vector
 	Nested variable vector
 	Nested tree
+	Danny
 	
 	Parse equation
 Look for variable
