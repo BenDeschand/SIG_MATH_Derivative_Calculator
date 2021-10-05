@@ -13,17 +13,18 @@ Class deriv
 	Nested variable vector
 	Nested tree
 	Danny
-	
+
 	Parse equation
 Look for variable
 	Look for constant
 	Look for exponent
-	Order of operation 
+	Order of operation
 	Negative check method
-Trigonmetric check 
+Trigonmetric check
 	Power rule method
 	What type method
 	Create answer
 Solve method
 Power rule
 Hello World
+adam was here
