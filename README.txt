@@ -1,3 +1,5 @@
+GabrielG Modification
+
 Different rules to solve derivatives (method to check)
 Multiple variables?
 Method to determine arithmetic of equation
