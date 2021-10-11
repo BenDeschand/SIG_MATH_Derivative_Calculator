@@ -8,4 +8,4 @@ derivative.o: derivative.cpp derivative.h
 	g++ -g -c derivative.cpp
 
 clean: 
-	rm test01.o derivative.o test
+	rm test*.o derivative.o test
