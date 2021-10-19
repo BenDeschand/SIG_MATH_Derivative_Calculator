@@ -18,6 +18,7 @@ Instructions to working with derivative calculator program
 	when making pull request detail what you did so I know what you did 
 
 :)
+:)
 
 Class deriv
 	private:
