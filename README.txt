@@ -17,7 +17,7 @@ Instructions to working with derivative calculator program
 			if you don't and make a pull request I will deny it becuase it will also push those files 
 	when making pull request detail what you did so I know what you did 
 
-
+:)
 
 Class deriv
 	private:
