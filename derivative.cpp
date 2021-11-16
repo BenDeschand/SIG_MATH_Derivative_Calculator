@@ -38,3 +38,22 @@ char derivCal::getVar()
 {
     return var;
 }
+
+string derivCal::powerRule(char var; int constant; int exponent) {
+	string result;
+
+	result = to_string(constant * exponent);
+
+	exponent -= 1;
+
+	if (exponent == 1) {
+		result += var;
+	}
+	else if (exponent == 0) {
+		return result;
+	}
+	else {
+		result += var + "^(" + to_string(exponent) + ")";
+	}
+	return result;
+}
