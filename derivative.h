@@ -18,4 +18,5 @@ class derivCal
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         char getVar();                        // accessor for var variable (for testing purposes)
         vector<char> parseString(string equation);
+        powerRule(char var; int constant; int exponent)
 };
