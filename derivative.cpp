@@ -10,6 +10,7 @@ derivCal::derivCal(string equation, char var)
 {
     this->equation = equation;
     this->var = var;
+    this->eq = parseString(equation);
 };
 
 vector<char> derivCal::parseString(string equation)
