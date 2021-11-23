@@ -39,10 +39,15 @@ char derivCal::getVar()
     return var;
 }
 
+// getVarIndex:
+// returns the index of the first occurence of string var in vector eq
+// returns -1 if not found
 int derivCal::getVarIndex() {
-    int index = -1;
+    int index = -1;  // -1 if not found
+    // iterate through vector
     for (int i = 0; i < eq.size(); i++) {
         if (eq[i] == var) {
+            // if found break
             index = i;
             break;
         }
