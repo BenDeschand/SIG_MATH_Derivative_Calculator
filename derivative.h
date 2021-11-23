@@ -17,4 +17,7 @@ class derivCal
         string getString();                   // accessor for string variable (for testing purposes)
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         char getVar();                        // accessor for var variable (for testing purposes)
+        
+        string powerRule(char var; string s); // power rule (yo mama)
+        vector<int> findMult(string s);       // find multiplication sign
 };
