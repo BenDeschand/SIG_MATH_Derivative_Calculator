@@ -14,6 +14,7 @@ class derivCal
     public:
         derivCal();                           // default constructor
         derivCal(string equation, char var);  // overloaded constructor
+        string solve();
         string getString();                   // accessor for string variable (for testing purposes)
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         char getVar();                        // accessor for var variable (for testing purposes)

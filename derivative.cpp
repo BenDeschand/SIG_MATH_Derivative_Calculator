@@ -13,6 +13,32 @@ derivCal::derivCal(string equation, char var)
     this->eq = parseString(equation);
 };
 
+// solve:
+// try all the derivative rules and return a string of the solved equation
+// will return string "error" if something went wrong
+string solve() {
+    string solution = "error";
+    bool found = false;
+
+    vector<int> indices = findAddSub(solution);
+    if (indices.size() > 0) {
+        // for (substring in indices) {
+        //     solution += derive(substring);
+        // }
+    }
+
+    return solution;
+}
+
+string derive(string sub_solution) {
+    if (sub_solution == "0" || sub_solution == "1") {
+        return "";
+    }
+    if (sub_solution == var) {
+        return "1";
+    }
+}
+
 vector<char> derivCal::parseString(string equation)
 {
     vector<char> result;
