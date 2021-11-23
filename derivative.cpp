@@ -27,7 +27,7 @@ char derivCal::getVar()
     return var;
 }
 
-vector<int> findMult(string s) {
+vector<int> derivCal::findMult(string s) {
 	vector<int> mults;      //my bag of mults
 
 	for (int i = 0; i < s.size(); i++) {
