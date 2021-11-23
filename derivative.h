@@ -17,6 +17,7 @@ class derivCal
         string getString();                   // accessor for string variable (for testing purposes)
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         char getVar();                        // accessor for var variable (for testing purposes)
+        int getVarIndex();
         vector<char> parseString(string equation);
-        powerRule(char var; int constant; int exponent)
+        string powerRule(char var, int constant, int exponent);
 };

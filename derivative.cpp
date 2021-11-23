@@ -39,7 +39,18 @@ char derivCal::getVar()
     return var;
 }
 
-string derivCal::powerRule(char var; int constant; int exponent) {
+int derivCal::getVarIndex() {
+    int index = -1;
+    for (int i = 0; i < eq.size(); i++) {
+        if (eq[i] == var) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+};
+
+string derivCal::powerRule(char var, int constant, int exponent) {
 	string result;
 
 	result = to_string(constant * exponent);
