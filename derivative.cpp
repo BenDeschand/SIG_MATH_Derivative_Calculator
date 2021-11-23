@@ -27,12 +27,18 @@ char derivCal::getVar()
     return var;
 }
 
-string derivCal::powerRule(char var; int constant; int exponent) {
+string derivCal::powerRule(char var; string s) {
 	string result;
+	int exponent;      //athiest malding rn (he doesn't believe in a higher power)
+	int constant;
 
-	result = to_string(constant * exponent);
+	int sIndex = 0;
+	int eIndex = s.find(var);
+	constant = stoi(s.substr(sIndex, eIndex));  //kinkyyarn for constant
 
-	exponent -= 1;
+	int sIndex = s.find("^(");
+	int eIndex = s.find(")");
+	exponent = stoi(s.substr(sIndex, eIndex));  //substring for exponent
 
 	if (exponent == 1) {
 		result += var;
@@ -41,7 +47,7 @@ string derivCal::powerRule(char var; int constant; int exponent) {
 		return result;
 	}
 	else {
-		result += var + "^(" + to_string(exponent) + ")";
+		result += var + "^" + to_string(exponent);
 	}
 	return result;
 }
