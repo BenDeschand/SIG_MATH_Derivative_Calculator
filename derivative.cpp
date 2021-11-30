@@ -27,8 +27,6 @@ char derivCal::getVar()
     return var;
 }
 
-
-
 vector<int> derivCal::findMult(string s) {
 	vector<int> mults;      //my bag of mults
 
@@ -48,7 +46,7 @@ string derivCal::powerRule(char var; string s) {
 
 	int sIndex = 0;
 	int eIndex = s.find(var);
-	constant = stoi(s.substr(sIndex, eIndex));  //kinky yarn becomes the constant
+	constant = stoi(s.substr(sIndex, eIndex));  //kinkyyarn for constant
 
 	int sIndex = s.find("^(");
 	int eIndex = s.find(")");
