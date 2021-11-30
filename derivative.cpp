@@ -4,6 +4,7 @@ derivCal::derivCal()
 {
     equation = "No equation inputted";
     var = '0';
+    equalsIndex = -1;
 };
 
 derivCal::derivCal(string equation, char var)
@@ -13,30 +14,55 @@ derivCal::derivCal(string equation, char var)
     this->eq = parseString(equation);
 };
 
+void derivCal::setEqualsIndex() {
+    for (int i = 0; i < eq.size(); i++) {
+        if (eq[i] == '=') {
+            equalsIndex = i;
+            return;
+        }
+    }
+    // if you get here without
+}
+
 // solve:
 // try all the derivative rules and return a string of the solved equation
 // will return string "error" if something went wrong
-string solve() {
+string derivCal::solve() {
     string solution = "error";
     bool found = false;
 
     vector<int> indices = findAddSub(solution);
     if (indices.size() > 0) {
-        // for (substring in indices) {
-        //     solution += derive(substring);
-        // }
+        for (int i = 0; i < indices.size(); i++) {
+            // EX: indicies.size() == 2
+            //   two +/- signs = 3 chunks
+            string subString;
+            if (i == 0) {
+                // substring is = to indicies[0]
+                // indicies[0] - equalsIndex + 1 is length
+                substring = equation.substr(equalsIndex, indicies[0] - equalsIndex + 1)
+            } else {
+                // substring is indicies[i-1] to indicies[i]
+            }
+
+            solution += derive(substring);
+        }
     }
 
     return solution;
 }
 
-string derive(string sub_solution) {
-    if (sub_solution == "0" || sub_solution == "1") {
+string derivCal::derive(string sub_solution) {
+    // base case 1
+    if (sub_solution == "0" || sub_solution == "1")
         return "";
-    }
-    if (sub_solution == var) {
+
+    // base case 2
+    if (sub_solution == var)
         return "1";
-    }
+
+    // check for 
+
 }
 
 vector<char> derivCal::parseString(string equation)
