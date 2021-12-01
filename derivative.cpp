@@ -29,42 +29,44 @@ void derivCal::setEqualsIndex() {
 // solve:
 // try all the derivative rules and return a string of the solved equation
 // will return string "error" if something went wrong
-string derivCal::solve() {
-    string solution = "error";
-    bool found = false;
-
-    vector<int> indices = findAddSub(solution);
-    if (indices.size() > 0) {
-        for (int i = 0; i < indices.size(); i++) {
-            // EX: indicies.size() == 2
-            //   two +/- signs = 3 chunks
-            string subString;
-            if (i == 0) {
-                // substring is = to indicies[0]
-                // indicies[0] - equalsIndex + 1 is length
-                substring = equation.substr(equalsIndex, indicies[0] - equalsIndex + 1)
-            } else {
-                // substring is indicies[i-1] to indicies[i]
-            }
-
-            solution += derive(substring);
-        }
-    }
-
-    return solution;
-}
-
-string derivCal::derive(string sub_solution) {
+// TODO(Adam): double check recursive logic
+string derivCal::solve(string sub_solution) {
     // base case 1
     if (sub_solution == "0" || sub_solution == "1")
         return "";
 
     // base case 2
-    if (sub_solution == var)
+    if (sub_solution.length() == 1 && sub_solution[0] == var)
         return "1";
 
-    // check for
+    string solution = "error";
+    bool found = false;
 
+    // check for add sub
+    vector<int> indices = findAddSub(sub_solution);
+    if (indices.size() > 0) {
+        for (int i = 0; i < indices.size(); i++) {
+            // EX: indicies.size() == 2
+            //   two +/- signs = 3 chunks
+            string substring;
+            if (i == 0) {
+                // substring is = to indices[0]
+                int len = indices[0] - equalsIndex + 1;
+                substring = equation.substr(equalsIndex, len);
+            } else {
+                // substring is indices[i-1] to indices[i]
+                // indices[i] - indices[i-1] + 1] is length
+                int len = indices[i] - indices[i-1] + 1;
+                substring = equation.substr(indices[i-1], len);
+            }
+
+            sub_solution += solve(substring);
+        }
+    }
+
+    // TODO(Adam): check each rule
+
+    return sub_solution;
 }
 
 vector<char> derivCal::parseString(string equation)
