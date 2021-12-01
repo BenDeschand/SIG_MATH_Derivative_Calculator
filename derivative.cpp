@@ -12,6 +12,7 @@ derivCal::derivCal(string equation, char var)
     this->equation = equation;
     this->var = var;
     this->eq = parseString(equation);
+    setEqualsIndex();
 };
 
 void derivCal::setEqualsIndex() {
@@ -21,7 +22,8 @@ void derivCal::setEqualsIndex() {
             return;
         }
     }
-    // if you get here without
+    // if you get here without finding an equals sign, error
+    throw string("no equals sign in equation");
 }
 
 // solve:
@@ -61,7 +63,7 @@ string derivCal::derive(string sub_solution) {
     if (sub_solution == var)
         return "1";
 
-    // check for 
+    // check for
 
 }
 
