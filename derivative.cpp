@@ -64,7 +64,7 @@ string derivCal::solve(string sub_solution) {
         }
     }
 
-    // TODO(Adam): check each rule
+    // TODO: check each rule
 
     return sub_solution;
 }
