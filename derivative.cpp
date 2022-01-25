@@ -50,7 +50,7 @@ char derivCal::getVar()
 }
 
 // getVarIndex
-// f
+// find the inex of the variable in the equation vector
 int derivCal::getVarIndex() {
     int index = -1;
     for (int i = 0; i < eq.size(); i++) {
@@ -62,6 +62,8 @@ int derivCal::getVarIndex() {
     return index;
 };
 
+// findAddSub
+// finds the position of every addition and subtraction sign in the given solution
 vector<int> findAddSub(string solution)
 {
     vector<int> result;
