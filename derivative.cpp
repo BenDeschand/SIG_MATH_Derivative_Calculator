@@ -1,5 +1,6 @@
 #include "derivative.h"
 
+// Default Constructor
 derivCal::derivCal()
 {
     equation = "No equation inputted";
@@ -7,6 +8,7 @@ derivCal::derivCal()
     equalsIndex = -1;
 };
 
+// Overloaded Constructor
 derivCal::derivCal(string equation, char var)
 {
     this->equation = equation;
@@ -69,6 +71,8 @@ string derivCal::solve(string sub_solution) {
     return sub_solution;
 }
 
+// parseString
+// parses the string into a vector
 vector<char> derivCal::parseString(string equation)
 {
     vector<char> result;
@@ -80,16 +84,22 @@ vector<char> derivCal::parseString(string equation)
     return result;
 };
 
+// getString
+// accessor for equation
 string derivCal::getString()
 {
     return equation;
 };
 
+// getVector
+// accessor for eq
 vector<char> derivCal::getVector()
 {
     return eq;
 };
 
+// getVar
+// accessor for var
 char derivCal::getVar()
 {
     return var;
@@ -109,6 +119,23 @@ int derivCal::getVarIndex() {
         }
     }
     return index;
+};
+
+// findAddSub
+// finds the position of every addition and subtraction sign in the given solution
+vector<int> findAddSub(string solution)
+{
+    vector<int> result;
+
+    for(int i = 0; i < solution.size(); i++)
+    {
+        if(solution.at(i) == '+' || solution.at(i) == '-')
+        {
+            result.push_back(i);
+        }
+    }
+
+    return result;
 };
 
 string derivCal::powerRule(char var, int constant, int exponent) {
