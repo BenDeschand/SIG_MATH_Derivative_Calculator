@@ -106,8 +106,6 @@ char derivCal::getVar()
     return var;
 }
 
-
-
 vector<int> derivCal::findMult(string s) {
 	vector<int> mults;      //my bag of mults
 
@@ -120,11 +118,9 @@ vector<int> derivCal::findMult(string s) {
 	return mults;     //you can have my bag now
 }
 
-
 // getVarIndex
-// find the inex of the variable in the equation vector
-int derivCal::getVarIndex() 
-{
+// find the index of the variable in the equation vector
+int derivCal::getVarIndex() {
     int index = -1;  // -1 if not found
     // iterate through vector
     for (int i = 0; i < eq.size(); i++) {
@@ -153,4 +149,3 @@ vector<int> derivCal::findAddSub(string solution)
 
     return result;
 };
-

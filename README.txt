@@ -35,11 +35,11 @@ Class deriv
 		Look for variable
 		Look for constant
 		Look for exponent
-		Order of operation 
+		Order of operation
 		Negative check method
 		Trigonmetric check
 		Power rule method
 		What type method
 		Create answer
-		Solve method
+		Solve method			// done (Adam)
 		Power rule
