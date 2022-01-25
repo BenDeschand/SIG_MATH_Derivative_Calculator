@@ -17,7 +17,6 @@ class derivCal
         string getString();                   // accessor for string variable (for testing purposes)
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         char getVar();                        // accessor for var variable (for testing purposes)
-        int getVarIndex();
-        vector<char> parseString(string equation);
-        string powerRule(char var, int constant, int exponent);
+        vector<int> findMult(string s)        // find a mult (epic style)
+        string powerRule(char var; string s)  // power rule (yo mama)
 };

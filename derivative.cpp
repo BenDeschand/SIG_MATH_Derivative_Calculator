@@ -12,6 +12,7 @@ derivCal::derivCal(string equation, char var)
 {
     this->equation = equation;
     this->var = var;
+
     this->eq = parseString(equation);
 };
 
@@ -49,6 +50,21 @@ char derivCal::getVar()
     return var;
 }
 
+
+vector<int> derivCal::findMult(string s) {
+	vector<int> mults;      //my bag of mults
+
+	for (int i = 0; i < s.size(); i++) {
+		if (s.at(i) == '*') {
+			mults.push_back(s.at(i));    //putting some mults in my bag
+		}
+	}
+
+	return mults;     //you can have my bag now
+}
+
+string derivCal::powerRule(char var; string s) {
+
 // getVarIndex
 // find the inex of the variable in the equation vector
 int derivCal::getVarIndex() {
@@ -81,10 +97,16 @@ vector<int> findAddSub(string solution)
 
 string derivCal::powerRule(char var, int constant, int exponent) {
 	string result;
+	int exponent;      //athiest malding rn (he doesn't believe in a higher power)
+	int constant;
 
-	result = to_string(constant * exponent);
+	int sIndex = 0;
+	int eIndex = s.find(var);
+	constant = stoi(s.substr(sIndex, eIndex));  //kinkyyarn for constant
 
-	exponent -= 1;
+	int sIndex = s.find("^(");
+	int eIndex = s.find(")");
+	exponent = stoi(s.substr(sIndex, eIndex));  //substring for exponent
 
 	if (exponent == 1) {
 		result += var;
@@ -93,7 +115,7 @@ string derivCal::powerRule(char var, int constant, int exponent) {
 		return result;
 	}
 	else {
-		result += var + "^(" + to_string(exponent) + ")";
+		result += var + "^" + to_string(exponent);
 	}
 	return result;
 }
