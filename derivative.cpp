@@ -46,7 +46,7 @@ string derivCal::solve(string sub_solution) {
     bool found = false;
 
     // check for add sub
-    vector<int> indices = findAddSub(sub_solution);
+    vector<int> indices = derivCal::findAddSub(sub_solution);
     if (indices.size() > 0) {
         for (int i = 0; i < indices.size(); i++) {
             // EX: indicies.size() == 2
@@ -135,7 +135,7 @@ int derivCal::getVarIndex() {
 
 // findAddSub
 // finds the position of every addition and subtraction sign in the given solution
-vector<int> findAddSub(string solution)
+vector<int> derivCal::findAddSub(string solution)
 {
     vector<int> result;
 
@@ -149,28 +149,3 @@ vector<int> findAddSub(string solution)
 
     return result;
 };
-
-string derivCal::powerRule(char var, int constant, int exponent) {
-	string result;
-	int exponent;      //athiest malding rn (he doesn't believe in a higher power)
-	int constant;
-
-	int sIndex = 0;
-	int eIndex = s.find(var);
-	constant = stoi(s.substr(sIndex, eIndex));  //kinkyyarn for constant
-
-	int sIndex = s.find("^(");
-	int eIndex = s.find(")");
-	exponent = stoi(s.substr(sIndex, eIndex));  //substring for exponent
-
-	if (exponent == 1) {
-		result += var;
-	}
-	else if (exponent == 0) {
-		return result;
-	}
-	else {
-		result += var + "^" + to_string(exponent);
-	}
-	return result;
-}
