@@ -33,43 +33,51 @@ void derivCal::setEqualsIndex() {
 // try all the derivative rules and return a string of the solved equation
 // will return string "error" if something went wrong
 // TODO(Adam): double check recursive logic
-string derivCal::solve(string sub_solution) {
-    // base case 1
-    if (sub_solution == "0" || sub_solution == "1")
-        return "";
-
-    // base case 2
-    if (sub_solution.length() == 1 && sub_solution[0] == var)
-        return "1";
-
-    string solution = "error";
-    bool found = false;
+string derivCal::solve(string equation) {
+    // base case
 
     // check for add sub
-    vector<int> indices = derivCal::findAddSub(sub_solution);
+    vector<int> indices = derivCal::findAddSub(equation);
+
     if (indices.size() > 0) {
-        for (int i = 0; i < indices.size(); i++) {
+        string substring = "";
+        for (int i = 0; i < indices.size() + 1; i++) {
             // EX: indicies.size() == 2
-            //   two +/- signs = 3 chunks
-            string substring;
+            //   indices = [6, 9]
+            //   y=4x^2+3x+2
+            //   two +/- signs = 3 segments
+            int left, right;
             if (i == 0) {
-                // substring is = to indices[0]
-                int len = indices[0] - equalsIndex + 1;
-                substring = equation.substr(equalsIndex, len);
+                // first segment
+                // equalsIndex to indices[i]
+                left = equalsIndex;
+                right = indices[i];
+            } else if (i == indices.size()) {
+                // last segment
+                // indices[i-1] to end
+                left = indices[i-1];
+                right = indices.size();
             } else {
-                // substring is indices[i-1] to indices[i]
-                // indices[i] - indices[i-1] + 1] is length
-                int len = indices[i] - indices[i-1] + 1;
-                substring = equation.substr(indices[i-1], len);
+                // middle segment
+                // indices[i-1] to indices[i]
+                left = indices[i-1];
+                right = indices[i];
             }
 
-            sub_solution += solve(substring);
+            int length = right - left - 1;
+            string segment = equation.substr(left + 1, length);
+            cout << "segment: " << segment << endl;
+            substring += solve(segment);
+            if (i != indices.size()) {
+                substring += equation[indices[i]];
+            }
         }
+
+        return substring;
     }
 
     // TODO: check each rule
-
-    return sub_solution;
+    return equation;
 }
 
 // parseString
@@ -149,3 +157,7 @@ vector<int> derivCal::findAddSub(string solution)
 
     return result;
 };
+
+string derivCal::getEquation() {
+    return equation;
+}

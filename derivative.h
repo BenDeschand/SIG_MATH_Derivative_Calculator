@@ -25,4 +25,5 @@ class derivCal
         vector<int> findMult(string s) ;       // find a mult (epic style)
         int getVarIndex();
         vector<int> findAddSub(string solution);
+        string getEquation();
 };
