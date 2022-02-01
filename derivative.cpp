@@ -29,6 +29,10 @@ void derivCal::setEqualsIndex() {
     throw string("no equals sign in equation");
 }
 
+string derivCal::getEquation() {
+    return equation;
+}
+
 // solve:
 // try all the derivative rules and return a string of the solved equation
 // will return string "error" if something went wrong
@@ -114,6 +118,8 @@ char derivCal::getVar()
     return var;
 }
 
+//findMult
+//find mult symbol
 vector<int> derivCal::findMult(string s) {
 	vector<int> mults;      //my bag of mults
 
@@ -158,6 +164,37 @@ vector<int> derivCal::findAddSub(string solution)
     return result;
 };
 
-string derivCal::getEquation() {
-    return equation;
+//findPowerrule
+//checks if substring is powerrule
+bool derivCal::isPowerRule(string s) {
+	if(s.find("^") != std::string::npos) {
+        return true;
+    }
+	return false;
+}
+
+//isSin
+//checks if substring is sin
+bool derivCal::isTan(string s) {
+	if(s.find("sin(") != std::string::npos) {
+        return true;
+    }
+	return false;
+}
+
+//isCos
+//checks if substring is cos
+bool derivCal::isTan(string s) {
+	if(s.find("cos(") != string::npos) {
+        return true;
+    }
+	return false;
+}
+//isTan
+//checks if substring is tan
+bool derivCal::isTan(string s) {
+	if(s.find("tan(") != string::npos) {
+        return true;
+    }
+	return false;
 }
