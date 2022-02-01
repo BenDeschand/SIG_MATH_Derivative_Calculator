@@ -164,8 +164,8 @@ vector<int> derivCal::findAddSub(string solution)
     return result;
 };
 
-//findPowerrule
-//checks if substring is powerrule
+// findPowerrule
+// checks if substring is powerrule
 bool derivCal::isPowerRule(string s) {
 	if(s.find("^") != string::npos) {
         return true;
@@ -173,25 +173,25 @@ bool derivCal::isPowerRule(string s) {
 	return false;
 }
 
-//isSin
-//checks if substring is sin
-bool derivCal::isTan(string s) {
+// isSin
+// checks if substring is sin
+bool derivCal::isSin(string s) {
 	if(s.find("sin(") != string::npos) {
         return true;
     }
 	return false;
 }
 
-//isCos
-//checks if substring is cos
-bool derivCal::isTan(string s) {
+// isCos
+// checks if substring is cos
+bool derivCal::isCos(string s) {
 	if(s.find("cos(") != string::npos) {
         return true;
     }
 	return false;
 }
-//isTan
-//checks if substring is tan
+// isTan
+// checks if substring is tan
 bool derivCal::isTan(string s) {
 	if(s.find("tan(") != string::npos) {
         return true;
