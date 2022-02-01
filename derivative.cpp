@@ -167,7 +167,7 @@ vector<int> derivCal::findAddSub(string solution)
 //findPowerrule
 //checks if substring is powerrule
 bool derivCal::isPowerRule(string s) {
-	if(s.find("^") != std::string::npos) {
+	if(s.find("^") != string::npos) {
         return true;
     }
 	return false;
@@ -176,7 +176,7 @@ bool derivCal::isPowerRule(string s) {
 //isSin
 //checks if substring is sin
 bool derivCal::isTan(string s) {
-	if(s.find("sin(") != std::string::npos) {
+	if(s.find("sin(") != string::npos) {
         return true;
     }
 	return false;
