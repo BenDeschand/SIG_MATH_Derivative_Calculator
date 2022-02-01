@@ -69,6 +69,7 @@ string derivCal::solve(string sub_solution) {
 
     // TODO: check each rule
 
+
     return sub_solution;
 }
 
@@ -106,6 +107,8 @@ char derivCal::getVar()
     return var;
 }
 
+//findMult
+//find mult symbol
 vector<int> derivCal::findMult(string s) {
 	vector<int> mults;      //my bag of mults
 
@@ -149,3 +152,38 @@ vector<int> derivCal::findAddSub(string solution)
 
     return result;
 };
+
+//findPowerrule
+//checks if substring is powerrule
+bool derivCal::isPowerRule(string s) {
+	if(s.find("^") != std::string::npos) {
+        return true;
+    }
+	return false;     
+}
+
+//isSin
+//checks if substring is sin
+bool derivCal::isTan(string s) {
+	if(s.find("sin(") != std::string::npos) {
+        return true;
+    }
+	return false;     
+}
+
+//isCos
+//checks if substring is cos
+bool derivCal::isTan(string s) {
+	if(s.find("cos(") != std::string::npos) {
+        return true;
+    }
+	return false;     
+}
+//isTan
+//checks if substring is tan
+bool derivCal::isTan(string s) {
+	if(s.find("tan(") != std::string::npos) {
+        return true;
+    }
+	return false;     
+}
