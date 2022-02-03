@@ -43,6 +43,7 @@ string derivCal::solve(string equation) {
     // check for add sub
     vector<int> indices = derivCal::findAddSub(equation);
 
+    // +/- was find, solve each segment
     if (indices.size() > 0) {
         string substring = "";
         for (int i = 0; i < indices.size() + 1; i++) {
@@ -70,18 +71,51 @@ string derivCal::solve(string equation) {
 
             int length = right - left - 1;
             string segment = equation.substr(left + 1, length);
-            cout << "segment: " << segment << endl;
+            cout << "segment: " << segment << endl;  // DEBUG
+
             substring += solve(segment);
             if (i != indices.size()) {
+                // add +/- symbols in between
                 substring += equation[indices[i]];
             }
         }
-
         return substring;
     }
 
     // TODO: check each rule
-    return equation;
+    // TODO: account for constants
+    int rule = getRule(equation);
+    string c = "c";
+    string u = "u";
+    string v = "v";
+    switch(rule) {
+        case 1:  // c
+            return "0";
+        case 2:  // cx
+            return "c";
+        case 3:  // v (v is a char != var)
+            return "0";
+        // case 4:  // u + v
+        // case 5:  // u - v
+        case 6:  // -v
+            // TODO: do we need this?
+            return "-" + solve(v);
+        case 7:  // u * v
+            return  u + " * " + solve(v) + " + " + v + " * " + solve(u);
+        case 8:  // u / v
+            return  "(" + v + " * " + solve(u) + " - " + u + " * " + solve(v) + ") / " + v + "^2";
+        case 9:  // u^c
+            return c + " * " + u + "(" + c + " - 1) * " + solve(u);
+        case 10:  // sqrt(u)
+        case 11:  // log(u)
+        case 12:  // exp(u)
+        case 13:  // sin(u)
+        case 14:  // cos(u)
+        case 15:  // tan(u)
+            return "(1 + tan( " + u + ")^2) * " + solve(u);
+        default:
+            return equation;
+    }
 }
 
 // parseString
@@ -163,6 +197,10 @@ vector<int> derivCal::findAddSub(string solution)
 
     return result;
 };
+
+int derivCal::getRule(string equation) {
+    return 0;
+}
 
 // findPowerrule
 // checks if substring is powerrule

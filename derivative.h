@@ -26,6 +26,7 @@ class derivCal
         vector<int> findMult(string s) ;       // find a mult (epic style)
         int getVarIndex();
         vector<int> findAddSub(string solution);
+        int getRule(string equation);
         bool isPowerRule(string s);  //checks for powerrule
         bool isSin(string s);         //checks for sin
         bool isCos(string s);        //checks for sin
