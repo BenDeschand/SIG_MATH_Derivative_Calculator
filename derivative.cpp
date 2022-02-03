@@ -29,6 +29,8 @@ void derivCal::setEqualsIndex() {
     throw string("no equals sign in equation");
 }
 
+// getEquation
+// accessor for string equation variable
 string derivCal::getEquation() {
     return equation;
 }
@@ -129,13 +131,6 @@ vector<char> derivCal::parseString(string equation)
     }
 
     return result;
-};
-
-// getString
-// accessor for equation
-string derivCal::getString()
-{
-    return equation;
 };
 
 // getVector

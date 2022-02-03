@@ -18,17 +18,17 @@ class derivCal
         derivCal();                           // default constructor
         derivCal(string equation, char var);  // overloaded constructor
         string solve(string sub_solution);
-        string getString();                   // accessor for string variable (for testing purposes)
-        string getEquation();
+        string getEquation();                 // accessor for equation variable
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
-        vector<char> parseString(string equation);
+        vector<char> parseString(string equation);  // return string equation as vector
         char getVar();                        // accessor for var variable (for testing purposes)
-        vector<int> findMult(string s) ;       // find a mult (epic style)
-        int getVarIndex();
-        vector<int> findAddSub(string solution);
-        int getRule(string equation);
-        bool isPowerRule(string s);  //checks for powerrule
-        bool isSin(string s);         //checks for sin
-        bool isCos(string s);        //checks for sin
-        bool isTan(string s);       //checks for sin
+        vector<int> findMult(string s) ;      // find a mult (epic style)
+        int getVarIndex();                    // find the index of the variable in the equation vector
+        vector<int> findAddSub(string solution);  // return a vector of the +/- signs in the equation
+        int getRule(string equation);         // returns a number corresponding to the derivative rule to be executed
+                                              //   using guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
+        bool isPowerRule(string s);           // checks for powerrule
+        bool isSin(string s);                 // checks for sin
+        bool isCos(string s);                 // checks for cos
+        bool isTan(string s);                 // checks for tan
 };
