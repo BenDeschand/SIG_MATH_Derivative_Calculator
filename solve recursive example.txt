@@ -1,0 +1,39 @@
+solve(y=tan(3x^2+4)-24x)
+  = solve(tan(3x^2+4))
+	  = "(1 + tan(3x^2+4)^2) * "
+	  + solve(3x^2+4)
+	  	  = solve(3x^2)
+			  = "3 * "
+			  + "2 * x^1 * "
+			  + solve(x)
+			  	  = "1"
+		  + " + "
+		  + solve(4)
+		  	  = "0"
+  + " - "
+  + solve(24x)
+      = "24"
+
+"(1 + tan(3x^2+4)^2) * 3 * 2 * x^1 * 1 + 0 - 24"
+
+solve(eqn):
+    if eqn has +/-:
+        derivative = ""
+        for each segment:
+            derivative += solve(segment)
+            if not last segment:
+                add the symbol
+        return derivative
+
+    if eqn is c:
+        return "0"
+    if eqn is cx:
+        return "c"
+    if eqn is u * v:
+        return  u + " * " + solve(v) + " + " + v + " * " + solve(u)
+    if eqn is u / v:
+        return  "(" + v + " * " + solve(u) + " - " + u + " * " + solve(v) + ") / " + v + "^2"
+    if eqn is u^c:
+        return c + " * " + u + "(" + c + " - 1) * " + solve(u)
+    if eqn is tan(u):
+        return "(1 + tan( " + u + ")^2) * " + solve(u)

@@ -5,10 +5,12 @@ using namespace std;
 
 int test01();
 int test02();
+int test03();
 
 int main() {
     test01();
     test02();
+    test03();
 }
 
 int test01()
@@ -26,4 +28,10 @@ int test02() {
 	assert(index == 3);
 
 	return 0;
+}
+
+int test03() {
+    derivCal test3 = derivCal("y=4x^2+3x-2", 'x');
+    cout << test3.solve(test3.getEquation()) << endl;
+    return 0;
 }
