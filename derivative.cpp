@@ -193,7 +193,7 @@ int derivCal::getRule(string equation) {
 //findMult
 //find mult symbol
 bool derivCal::findMult(string s) {
-	if(s.find("^") != string::npos) {
+	if(s.find("*") != string::npos) {
         return true;
     }
 	return false;
