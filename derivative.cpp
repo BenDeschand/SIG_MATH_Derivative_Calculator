@@ -186,7 +186,11 @@ vector<int> derivCal::findAddSub(string solution)
     return result;
 };
 
-int derivCal::getRule(string equation, string c, string u, string v) {
+int derivCal::getRule(string equation, string& c, string& u, string& v) {
+    // find multi (Adam)
+    // find division (Ben)
+    // find parentheses (Dylan)
+        // use functions already made
 
     return 0;
 }

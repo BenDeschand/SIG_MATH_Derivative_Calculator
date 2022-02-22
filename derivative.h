@@ -25,7 +25,7 @@ class derivCal
         bool findMult(string s) ;      // find a mult (epic style)
         int getVarIndex();                    // find the index of the variable in the equation vector
         vector<int> findAddSub(string solution);  // return a vector of the +/- signs in the equation
-        int getRule(string equation, string c, string u, string v);         // returns a number corresponding to the derivative rule to be executed
+        int getRule(string equation, string& c, string& u, string& v);         // returns a number corresponding to the derivative rule to be executed
                                               //   using guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
         bool isPowerRule(string s);           // checks for powerrule
         bool isSin(string s);                 // checks for sin
