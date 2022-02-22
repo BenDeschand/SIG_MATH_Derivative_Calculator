@@ -152,19 +152,7 @@ char derivCal::getVar()
     return var;
 }
 
-//findMult
-//find mult symbol
-vector<int> derivCal::findMult(string s) {
-	vector<int> mults;      //my bag of mults
 
-	for (int i = 0; i < s.size(); i++) {
-		if (s.at(i) == '*') {
-			mults.push_back(s.at(i));    //putting some mults in my bag
-		}
-	}
-
-	return mults;     //you can have my bag now
-}
 
 // getVarIndex
 // find the index of the variable in the equation vector
@@ -200,6 +188,15 @@ vector<int> derivCal::findAddSub(string solution)
 
 int derivCal::getRule(string equation) {
     return 0;
+}
+
+//findMult
+//find mult symbol
+bool derivCal::findMult(string s) {
+	if(s.find("^") != string::npos) {
+        return true;
+    }
+	return false;
 }
 
 // findPowerrule

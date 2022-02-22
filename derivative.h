@@ -22,7 +22,7 @@ class derivCal
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         vector<char> parseString(string equation);  // return string equation as vector
         char getVar();                        // accessor for var variable (for testing purposes)
-        vector<int> findMult(string s) ;      // find a mult (epic style)
+        bool findMult(string s) ;      // find a mult (epic style)
         int getVarIndex();                    // find the index of the variable in the equation vector
         vector<int> findAddSub(string solution);  // return a vector of the +/- signs in the equation
         int getRule(string equation);         // returns a number corresponding to the derivative rule to be executed
