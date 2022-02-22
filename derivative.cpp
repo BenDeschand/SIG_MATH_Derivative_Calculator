@@ -109,10 +109,15 @@ string derivCal::solve(string equation) {
         case 9:  // u^c
             return c + " * " + u + "(" + c + " - 1) * " + solve(u);
         case 10:  // sqrt(u)
+            return "(1/2) * " + solve(u) + "/ srt(" + u + ")";
         case 11:  // log(u)
+            return solve(u) + " / " + u;
         case 12:  // exp(u)
+            return "exp(" + u + ") * " + solve(u);
         case 13:  // sin(u)
+            return "sin(" + u + ") * " + solve(u);
         case 14:  // cos(u)
+            return "-sin(" + u + ") * " + solve(u);
         case 15:  // tan(u)
             return "(1 + tan( " + u + ")^2) * " + solve(u);
         default:
