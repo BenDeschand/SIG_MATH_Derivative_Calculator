@@ -86,10 +86,10 @@ string derivCal::solve(string equation) {
 
     // TODO: check each rule
     // TODO: account for constants
-    int rule = getRule(equation);
     string c = "c";
     string u = "u";
-    string v = "v";
+    string v = "v"; 
+    int rule = getRule(equation, c, u, v);
     switch(rule) {
         case 1:  // c
             return "0";
@@ -186,7 +186,8 @@ vector<int> derivCal::findAddSub(string solution)
     return result;
 };
 
-int derivCal::getRule(string equation) {
+int derivCal::getRule(string equation, string c, string u, string v) {
+
     return 0;
 }
 
