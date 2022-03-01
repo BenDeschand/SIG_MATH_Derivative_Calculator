@@ -116,7 +116,7 @@ string derivCal::solve(string equation) {
         case 12:  // exp(u)
             return "exp(" + u + ") * " + solve(u);
         case 13:  // sin(u)
-            return "sin(" + u + ") * " + solve(u);
+            return "cos(" + u + ") * " + solve(u);
         case 14:  // cos(u)
             return "-sin(" + u + ") * " + solve(u);
         case 15:  // tan(u)
