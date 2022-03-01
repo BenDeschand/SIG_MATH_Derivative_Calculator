@@ -88,7 +88,7 @@ string derivCal::solve(string equation) {
     // TODO: account for constants
     string c = "c";
     string u = "u";
-    string v = "v"; 
+    string v = "v";
     int rule = getRule(equation, c, u, v);
     switch(rule) {
         case 1:  // c
@@ -109,7 +109,7 @@ string derivCal::solve(string equation) {
         case 9:  // u^c
             return c + " * " + u + "(" + c + " - 1) * " + solve(u);
         case 10:  // sqrt(u)
-            return "(1/2) * " + solve(u) + "/ srt(" + u + ")";
+            return "(1/2) * " + solve(u) + "/ sqrt(" + u + ")";
         case 11:  // log(u)
             return solve(u) + " / " + u;
         case 12:  // exp(u)
@@ -188,15 +188,19 @@ vector<int> derivCal::findAddSub(string solution)
 
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
     // find multi (Adam)
+    if (equation.find("*") != std::npos) {
+        u = equation.substr(0, equation.find('*'));
+        v = equation.substr(equation.find('*') + 1);
+        return 7;
+    }
+
     // find division (Ben)
-    if(equation.find('/') != string::npos)
-    {
+    if(equation.find('/') != string::npos) {
         u = equation.substr(0, equation.find('/'));
         v = equation.substr(equation.find('/') + 1);
         return 8;
     }
-    
-    
+
     // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
     int paranthesis = 0;  //index of first paranthesis
     for(int i = 0; i < equation.size() && equation.at(i) != '('; i++) {
@@ -212,19 +216,19 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     //sin
     if(equation.substr(paranthesis - 3, 3) == "sin") {
-        u = equation.substr(paranthesis, equation.size() - 5); //-4 for the "sin(" and -1 for the ")". 
+        u = equation.substr(paranthesis, equation.size() - 5); //-4 for the "sin(" and -1 for the ")".
         return 13;                                              //didn't do the math, didnt test it, hope it works
     }
 
     //cos
     if(equation.substr(paranthesis - 3, 3) == "cos") {
-        u = equation.substr(paranthesis, equation.size() - 5); 
+        u = equation.substr(paranthesis, equation.size() - 5);
         return 14;
     }
 
     //tan
     if(equation.substr(paranthesis - 3, 3) == "tan") {
-        u = equation.substr(paranthesis, equation.size() - 5); 
+        u = equation.substr(paranthesis, equation.size() - 5);
         return 15;
     }
 
