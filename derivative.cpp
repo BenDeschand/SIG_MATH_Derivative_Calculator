@@ -189,7 +189,41 @@ vector<int> derivCal::findAddSub(string solution)
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
     // find multi (Adam)
     // find division (Ben)
-    // find parentheses (Dylan)
+    
+    
+    // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
+    int paranthesis = 0;  //index of first paranthesis
+    for(int i = 0; i < equation.size() && equation.at[i] != '('; i++) {
+        paranthesis++;
+    }
+
+    //pow
+    if(equation.substr(paranthesis - 1, 1) == "^") {
+        *c = equation.substr(paranthesis, equation.size() - 4); //prolly the right amount idk
+        *u = equation.substr(0, 1);
+        return 9;
+    }
+
+    //sin
+    if(equation.substr(paranthesis - 3, 3) == "sin") {
+        *u = equation.substr(paranthesis, equation.size() - 5); //-4 for the "sin(" and -1 for the ")". 
+        return 13;                                              //didn't do the math, didnt test it, hope it works
+    }
+
+    //cos
+    if(equation.substr(paranthesis - 3, 3) == "cos") {
+        *u = equation.substr(paranthesis, equation.size() - 5); 
+        return 14;
+    }
+
+    //tan
+    if(equation.substr(paranthesis - 3, 3) == "tan") {
+        *u = equation.substr(paranthesis, equation.size() - 5); 
+        return 15;
+    }
+
+
+
         // use functions already made
 
     return 0;
