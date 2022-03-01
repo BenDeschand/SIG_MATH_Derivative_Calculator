@@ -193,7 +193,12 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
     }
 
     // find division (Ben)
-
+    if(equation.find('/') != string::npos)
+    {
+        u = equation.substr(0, equation.find('/'));
+        v = equation.substr(equation.find('/') + 1);
+        return 8;
+    }
 
     // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
     int paranthesis = 0;  //index of first paranthesis
