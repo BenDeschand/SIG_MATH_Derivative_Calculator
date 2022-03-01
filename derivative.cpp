@@ -88,7 +88,7 @@ string derivCal::solve(string equation) {
     // TODO: account for constants
     string c = "c";
     string u = "u";
-    string v = "v"; 
+    string v = "v";
     int rule = getRule(equation, c, u, v);
     switch(rule) {
         case 1:  // c
@@ -109,7 +109,7 @@ string derivCal::solve(string equation) {
         case 9:  // u^c
             return c + " * " + u + "(" + c + " - 1) * " + solve(u);
         case 10:  // sqrt(u)
-            return "(1/2) * " + solve(u) + "/ srt(" + u + ")";
+            return "(1/2) * " + solve(u) + "/ sqrt(" + u + ")";
         case 11:  // log(u)
             return solve(u) + " / " + u;
         case 12:  // exp(u)
