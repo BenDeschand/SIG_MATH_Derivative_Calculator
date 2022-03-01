@@ -189,12 +189,13 @@ vector<int> derivCal::findAddSub(string solution)
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
     // find multi (Adam)
     if (equation.find("*") != std::npos) {
-
+        u = equation.substr(0, equation.find('*'));
+        v = equation.substr(equation.find('*') + 1);
+        return 7;
     }
 
     // find division (Ben)
-    if(equation.find('/') != string::npos)
-    {
+    if(equation.find('/') != string::npos) {
         u = equation.substr(0, equation.find('/'));
         v = equation.substr(equation.find('/') + 1);
         return 8;
