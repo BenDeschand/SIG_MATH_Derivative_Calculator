@@ -9,19 +9,19 @@ class derivCal
     private:
         string equation;   // input of equation
         vector<char> eq;   // vector of equation for easier traversal
-        char var;          // variable that we are solving for
+        string var;          // variable that we are solving for
         int equalsIndex;   // index of equals sign
 
         void setEqualsIndex(); // finds equals sign and sets equalsIndex
 
     public:
         derivCal();                           // default constructor
-        derivCal(string equation, char var);  // overloaded constructor
+        derivCal(string equation, string var);  // overloaded constructor
         string solve(string sub_solution);
         string getEquation();                 // accessor for equation variable
         vector<char> getVector();             // accessor for vector variable (for testing purposes)
         vector<char> parseString(string equation);  // return string equation as vector
-        char getVar();                        // accessor for var variable (for testing purposes)
+        string getVar();                        // accessor for var variable (for testing purposes)
         bool findMult(string s) ;      // find a mult (epic style)
         int getVarIndex();                    // find the index of the variable in the equation vector
         vector<int> findAddSub(string solution);  // return a vector of the +/- signs in the equation

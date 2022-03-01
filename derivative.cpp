@@ -4,12 +4,12 @@
 derivCal::derivCal()
 {
     equation = "No equation inputted";
-    var = '0';
+    var = "0";
     equalsIndex = -1;
 };
 
 // Overloaded Constructor
-derivCal::derivCal(string equation, char var)
+derivCal::derivCal(string equation, string var)
 {
     this->equation = equation;
     this->var = var;
@@ -105,6 +105,7 @@ string derivCal::solve(string equation) {
         case 7:  // u * v
             return  u + " * " + solve(v) + " + " + v + " * " + solve(u);
         case 8:  // u / v
+            cout << "made it to 8" << endl;
             return  "(" + v + " * " + solve(u) + " - " + u + " * " + solve(v) + ") / " + v + "^2";
         case 9:  // u^c
             return c + " * " + u + "(" + c + " - 1) * " + solve(u);
@@ -147,7 +148,7 @@ vector<char> derivCal::getVector()
 
 // getVar
 // accessor for var
-char derivCal::getVar()
+string derivCal::getVar()
 {
     return var;
 }
@@ -160,7 +161,7 @@ int derivCal::getVarIndex() {
     int index = -1;  // -1 if not found
     // iterate through vector
     for (int i = 0; i < eq.size(); i++) {
-        if (eq[i] == var) {
+        if (eq[i] == var[0]) {
             // if found break
             index = i;
             break;
@@ -187,8 +188,14 @@ vector<int> derivCal::findAddSub(string solution)
 };
 
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
+    cout << "equation: " << equation << endl;
+    if(equation == var)
+    {
+        return 2;
+    }
+
     // find multi (Adam)
-    if (equation.find("*") != std::npos) {
+    if (equation.find("*") != string::npos) {
         u = equation.substr(0, equation.find('*'));
         v = equation.substr(equation.find('*') + 1);
         return 7;
@@ -196,16 +203,15 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     // find division (Ben)
     if(equation.find('/') != string::npos) {
+        cout << "found division" << endl;
         u = equation.substr(0, equation.find('/'));
         v = equation.substr(equation.find('/') + 1);
         return 8;
     }
 
     // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
-    int paranthesis = 0;  //index of first paranthesis
-    for(int i = 0; i < equation.size() && equation.at(i) != '('; i++) {
-        paranthesis++;
-    }
+    int paranthesis = equation.find('(');  //index of first paranthesis
+    cout << "parenthesis: " << paranthesis << endl;
 
     //pow
     if(equation.substr(paranthesis - 1, 1) == "^") {
@@ -216,7 +222,8 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     //sin
     if(equation.substr(paranthesis - 3, 3) == "sin") {
-        u = equation.substr(paranthesis, equation.size() - 5); //-4 for the "sin(" and -1 for the ")".
+        cout << "sin" << endl;
+        u = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1); //-4 for the "sin(" and -1 for the ")".
         return 13;                                              //didn't do the math, didnt test it, hope it works
     }
 
@@ -228,7 +235,8 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     //tan
     if(equation.substr(paranthesis - 3, 3) == "tan") {
-        u = equation.substr(paranthesis, equation.size() - 5);
+        cout << "tan" << endl;
+        u = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1);
         return 15;
     }
 

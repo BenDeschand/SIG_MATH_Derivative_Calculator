@@ -22,7 +22,7 @@ int test01()
 }
 
 int test02() {
-	derivCal test2 = derivCal("y=mx+b", 'x');
+	derivCal test2 = derivCal("y=mx+b", "x");
 
 	int index = test2.getVarIndex();
 	assert(index == 3);
@@ -31,7 +31,7 @@ int test02() {
 }
 
 int test03() {
-    derivCal test3 = derivCal("y=4x^2+3x-2", 'x');
+    derivCal test3 = derivCal("y=tan(x)/sin(x)", "x");
     cout << test3.solve(test3.getEquation()) << endl;
     return 0;
 }
