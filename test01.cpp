@@ -32,6 +32,6 @@ int test02() {
 
 int test03() {
     derivCal test3 = derivCal("y=tan(x)/sin(x)", "x");
-    cout << test3.solve(test3.getEquation()) << endl;
+    cout << test3.solve() << endl;
     return 0;
 }

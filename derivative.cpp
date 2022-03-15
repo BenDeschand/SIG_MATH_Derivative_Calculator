@@ -35,11 +35,30 @@ string derivCal::getEquation() {
     return equation;
 }
 
+string derivCal::solve() {
+    string ans;
+    string sub_equation;
+
+    // deletes the equal sign from the equation
+    if(equation.find('=') < equation.find(var[0]))
+    {
+        sub_equation = equation.substr(equation.find('=') + 1);
+    }
+    else 
+    {
+        sub_equation = equation.substr(0, equation.find('='));
+    }
+
+    ans = derive(sub_equation);
+
+    return ans;
+}
+
 // solve:
 // try all the derivative rules and return a string of the solved equation
 // will return string "error" if something went wrong
 // TODO(Adam): double check recursive logic
-string derivCal::solve(string equation) {
+string derivCal::derive(string equation) {
     // base case
 
     // check for add sub
@@ -73,9 +92,9 @@ string derivCal::solve(string equation) {
 
             int length = right - left - 1;
             string segment = equation.substr(left + 1, length);
-            cout << "segment: " << segment << endl;  // DEBUG
+            //cout << "segment: " << segment << endl;  // DEBUG
 
-            substring += solve(segment);
+            substring += derive(segment);
             if (i != indices.size()) {
                 // add +/- symbols in between
                 substring += equation[indices[i]];
@@ -101,26 +120,26 @@ string derivCal::solve(string equation) {
         // case 5:  // u - v
         case 6:  // -v
             // TODO: do we need this?
-            return "-" + solve(v);
+            return "-" + derive(v);
         case 7:  // u * v
-            return  u + " * " + solve(v) + " + " + v + " * " + solve(u);
+            return  u + " * " + derive(v) + " + " + v + " * " + derive(u);
         case 8:  // u / v
-            cout << "made it to 8" << endl;
-            return  "(" + v + " * " + solve(u) + " - " + u + " * " + solve(v) + ") / " + v + "^2";
+            //cout << "made it to 8" << endl;
+            return  "(" + v + " * " + derive(u) + " - " + u + " * " + derive(v) + ") / " + v + "^2";
         case 9:  // u^c
-            return c + " * " + u + "(" + c + " - 1) * " + solve(u);
+            return c + " * " + u + "(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
-            return "(1/2) * " + solve(u) + "/ sqrt(" + u + ")";
+            return "(1/2) * " + derive(u) + "/ sqrt(" + u + ")";
         case 11:  // log(u)
-            return solve(u) + " / " + u;
+            return derive(u) + " / " + u;
         case 12:  // exp(u)
-            return "exp(" + u + ") * " + solve(u);
+            return "exp(" + u + ") * " + derive(u);
         case 13:  // sin(u)
-            return "cos(" + u + ") * " + solve(u);
+            return "cos(" + u + ") * " + derive(u);
         case 14:  // cos(u)
-            return "-sin(" + u + ") * " + solve(u);
+            return "-sin(" + u + ") * " + derive(u);
         case 15:  // tan(u)
-            return "(1 + tan( " + u + ")^2) * " + solve(u);
+            return "(1 + tan( " + u + ")^2) * " + derive(u);
         default:
             return equation;
     }
@@ -188,7 +207,7 @@ vector<int> derivCal::findAddSub(string solution)
 };
 
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
-    cout << "equation: " << equation << endl;
+    //cout << "equation: " << equation << endl;
     if(equation == var)
     {
         return 2;
@@ -203,7 +222,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     // find division (Ben)
     if(equation.find('/') != string::npos) {
-        cout << "found division" << endl;
+        //cout << "found division" << endl;
         u = equation.substr(0, equation.find('/'));
         v = equation.substr(equation.find('/') + 1);
         return 8;
@@ -211,7 +230,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
     int paranthesis = equation.find('(');  //index of first paranthesis
-    cout << "parenthesis: " << paranthesis << endl;
+    //cout << "parenthesis: " << paranthesis << endl;
 
     //pow
     if(equation.substr(paranthesis - 1, 1) == "^") {
@@ -222,7 +241,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     //sin
     if(equation.substr(paranthesis - 3, 3) == "sin") {
-        cout << "sin" << endl;
+        //cout << "sin" << endl;
         u = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1); //-4 for the "sin(" and -1 for the ")".
         return 13;                                              //didn't do the math, didnt test it, hope it works
     }
@@ -235,7 +254,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     //tan
     if(equation.substr(paranthesis - 3, 3) == "tan") {
-        cout << "tan" << endl;
+        //cout << "tan" << endl;
         u = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1);
         return 15;
     }
