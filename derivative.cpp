@@ -128,7 +128,7 @@ string derivCal::derive(string equation) {
             //cout << "made it to 8" << endl;
             return  "(" + v + " * " + derive(u) + " - " + u + " * " + derive(v) + ") / " + v + "^2";
         case 9:  // u^c
-            cout << "made it to 9" << endl;
+            //cout << "made it to 9" << endl;
             return c + " * " + u + "^(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
             return "(1/2) * " + derive(u) + "/ sqrt(" + u + ")";
@@ -234,8 +234,8 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
         if(equation.substr(parentheses - 1, 1) == "^") {
             c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); //prolly the right amount idk
             u = equation.substr(0, equation.find('^'));
-            cout << u << endl;
-            cout << c << endl;
+            //cout << u << endl;
+            //cout << c << endl;
             return 9;
         }
 
