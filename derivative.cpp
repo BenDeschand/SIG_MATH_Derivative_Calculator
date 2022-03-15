@@ -44,7 +44,7 @@ string derivCal::solve() {
     {
         sub_equation = equation.substr(equation.find('=') + 1);
     }
-    else 
+    else
     {
         sub_equation = equation.substr(0, equation.find('='));
     }
@@ -227,12 +227,12 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
     }
 
     // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
-    int paranthesis = equation.find('(');  //index of first paranthesis
-    //cout << "parenthesis: " << paranthesis << endl;
-    if(paranthesis >= 0) {
+    int parentheses = equation.find('(');  //index of first parentheses
+    //cout << "parentheses: " << parentheses << endl;
+    if(parentheses >= 0) {
         //pow
-        if(equation.substr(paranthesis - 1, 1) == "^") {
-            c = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1); //prolly the right amount idk
+        if(equation.substr(parentheses - 1, 1) == "^") {
+            c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); //prolly the right amount idk
             u = equation.substr(0, equation.find('^'));
             cout << u << endl;
             cout << c << endl;
@@ -240,26 +240,26 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
         }
 
         //sin
-        if(equation.substr(paranthesis - 3, 3) == "sin") {
+        if(equation.substr(parentheses - 3, 3) == "sin") {
             //cout << "sin" << endl;
-            u = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1); //-4 for the "sin(" and -1 for the ")".
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); //-4 for the "sin(" and -1 for the ")".
             return 13;                                              //didn't do the math, didnt test it, hope it works
         }
 
         //cos
-        if(equation.substr(paranthesis - 3, 3) == "cos") {
-            u = equation.substr(paranthesis, equation.size() - 5);
+        if(equation.substr(parentheses - 3, 3) == "cos") {
+            u = equation.substr(parentheses, equation.size() - 5);
             return 14;
         }
 
         //tan
-        if(equation.substr(paranthesis - 3, 3) == "tan") {
+        if(equation.substr(parentheses - 3, 3) == "tan") {
             //cout << "tan" << endl;
-            u = equation.substr(paranthesis + 1, equation.find(')') - paranthesis - 1);
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 15;
         }
-    } // if statement for parenthesis
-    else 
+    } // if statement for parentheses
+    else
     {
         int varPos = equation.find(var[0]);
         if(varPos >= 0)
@@ -268,13 +268,13 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
                 c = equation.substr(0, varPos);
                 return 2;
             }
-            else 
+            else
             {
                 c = "1";
                 return 2;
             }
         }
-        else 
+        else
         {
             return 1;
         }
