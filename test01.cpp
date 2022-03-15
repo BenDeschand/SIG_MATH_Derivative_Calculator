@@ -7,13 +7,16 @@ int test01();
 int test02();
 int test03();
 int test04();
+int test05();
+int test06();
 
 int main() {
     test01();
     test02();
     test03();
     test04();
-}
+    test05();
+    test06();}
 
 int test01()
 {
@@ -41,5 +44,17 @@ int test03() {
 int test04() {
     derivCal test4 = derivCal("y=2*x^(2)", "x");
     cout << test4.solve() << endl;
+    return 0;
+}
+
+int test05() {
+    derivCal test = derivCal("y=x/sin(x)", "x");
+    cout << test.solve() << endl;
+    return 0;
+}
+
+int test06() {
+    derivCal test = derivCal("y=x*sin(x)", "x");
+    cout << test.solve() << endl;
     return 0;
 }
