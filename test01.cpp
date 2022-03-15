@@ -6,11 +6,16 @@ using namespace std;
 int test01();
 int test02();
 int test03();
+int test05();
+int test06();
+
 
 int main() {
     test01();
     test02();
     test03();
+    test05();
+    test06();
 }
 
 int test01()
@@ -33,5 +38,17 @@ int test02() {
 int test03() {
     derivCal test3 = derivCal("y=tan(x)/sin(x)", "x");
     cout << test3.solve() << endl;
+    return 0;
+}
+
+int test05() {
+    derivCal test = derivCal("y=x/sin(x)", "x");
+    cout << test.solve() << endl;
+    return 0;
+}
+
+int test06() {
+    derivCal test = derivCal("y=x*sin(x)", "x");
+    cout << test.solve() << endl;
     return 0;
 }
