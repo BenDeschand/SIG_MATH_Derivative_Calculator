@@ -3,8 +3,8 @@
 // Default Constructor
 derivCal::derivCal()
 {
-    equation = "No equation inputted";
-    var = "0";
+    equation = "No Equation";
+    var = "No Var";
     equalsIndex = -1;
 };
 
