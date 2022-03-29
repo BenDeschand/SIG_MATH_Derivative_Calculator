@@ -32,4 +32,5 @@ class derivCal
         bool isSin(string s);                 // checks for sin
         bool isCos(string s);                 // checks for cos
         bool isTan(string s);                 // checks for tan
+        bool isSqrt(string s);                // checks for sqrt
 };

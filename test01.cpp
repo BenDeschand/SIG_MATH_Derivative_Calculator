@@ -9,6 +9,7 @@ int test03();
 int test04();
 int test05();
 int test06();
+int test07();
 
 int main() {
     test01();
@@ -16,7 +17,9 @@ int main() {
     test03();
     test04();
     test05();
-    test06();}
+    test06();
+    test07();
+}
 
 int test01()
 {
@@ -60,6 +63,8 @@ int test06() {
 }
 
 int test07() {
+    derivCal test = derivCal("y=sqrt(x)", "x");
+    cout << test.solve() << endl;
     return 0;
 }
 

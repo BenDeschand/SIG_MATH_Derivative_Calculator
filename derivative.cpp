@@ -131,6 +131,7 @@ string derivCal::derive(string equation) {
             //cout << "made it to 9" << endl;
             return c + " * " + u + "^(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
+            cout << "u: " << u << endl;
             return "(1/2) * " + derive(u) + "/ sqrt(" + u + ")";
         case 11:  // log(u)
             return derive(u) + " / " + u;
@@ -228,7 +229,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
     int parentheses = equation.find('(');  //index of first parentheses
-    //cout << "parentheses: " << parentheses << endl;
+    // cout << "parentheses: " << parentheses << endl;
     if(parentheses >= 0) {
         //pow
         if(equation.substr(parentheses - 1, 1) == "^") {
@@ -241,12 +242,13 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
 
         // sqrt
-        if(equation.substr(parentheses - 4, 4) == "sqrt") {
-            //cout << "tan" << endl;
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
-            return 10;
+        if(parentheses > 3) {
+            if(equation.substr(parentheses - 4, 4) == "sqrt") {
+                cout << "sqrt" << endl;
+                u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+                return 10;
+            }
         }
-
 
         // log
         if(equation.substr(parentheses - 3, 3) == "log") {
@@ -264,7 +266,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
         //sin
         if(equation.substr(parentheses - 3, 3) == "sin") {
-            //cout << "sin" << endl;
+            // cout << "sin" << endl;
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); //-4 for the "sin(" and -1 for the ")".
             return 13;                                              //didn't do the math, didnt test it, hope it works
         }
@@ -277,7 +279,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
         //tan
         if(equation.substr(parentheses - 3, 3) == "tan") {
-            //cout << "tan" << endl;
+            // cout << "tan" << endl;
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 15;
         }
@@ -359,7 +361,7 @@ bool derivCal::isTan(string s) {
 
 // isSqrt
 // checks if substring is sqrt
-bool derivCal::isSin(string s) {
+bool derivCal::isSqrt(string s) {
 	if(s.find("sqrt(") != string::npos) {
         return true;
     }
