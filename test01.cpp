@@ -76,6 +76,8 @@ int test10() {
 }
 
 int test11() {
+    derivCal test = derivCal("y=x^sinx", "x");
+    cout << test.solve() << endl;
     return 0;
 }
 
