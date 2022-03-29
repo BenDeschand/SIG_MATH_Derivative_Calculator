@@ -10,6 +10,7 @@ int test04();
 int test05();
 int test06();
 int test07();
+int test08();
 
 int main() {
     test01();
@@ -19,6 +20,7 @@ int main() {
     test05();
     test06();
     test07();
+    test08();
 }
 
 int test01()
@@ -39,36 +41,38 @@ int test02() {
 }
 
 int test03() {
-    derivCal test3 = derivCal("y=tan(x)/sin(x)", "x");
-    cout << "test03: " << test3.solve() << endl;
+    derivCal test = derivCal("y=tan(x)/sin(x)", "x");
+    cout << "test03: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
     return 0;
 }
 
 int test04() {
-    derivCal test4 = derivCal("y=2*x^(2)", "x");
-    cout << "test04: " << test4.solve() << endl;
+    derivCal test = derivCal("y=2*x^(2)", "x");
+    cout << "test04: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;    
     return 0;
 }
 
 int test05() {
     derivCal test = derivCal("y=x/sin(x)", "x");
-    cout << "test05: " << test.solve() << endl;
+    cout << "test05: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
     return 0;
 }
 
 int test06() {
     derivCal test = derivCal("y=x*sin(x)", "x");
-    cout << "test06: " << test.solve() << endl;
+    cout << "test06: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
     return 0;
 }
 
 int test07() {
-    derivCal test = derivCal("y=sqrt(x)", "x");
-    cout << "test07: " << test.solve() << endl;
+    derivCal test = derivCal("y=sqrt(x^(2))", "x");
+    cout << "test07: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
     return 0;
 }
 
 int test08() {
+    derivCal test = derivCal("y=log(2x)", "x");
+    cout << "test08: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
     return 0;
 }
 

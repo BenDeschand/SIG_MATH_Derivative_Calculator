@@ -259,6 +259,14 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
         }
 
 
+         //ln
+        if(equation.substr(parentheses - 2, 2) == "ln") {
+            //cout << "ln" << endl;
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 11;
+        }
+
+
         // exp
         if(equation.substr(parentheses - 3, 3) == "exp") {
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
@@ -284,20 +292,6 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             // cout << "tan" << endl;
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 15;
-        }
-
-        //log
-        if(equation.substr(parentheses - 3, 3) == "log") {
-            //cout << "log" << endl;
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
-            return 11;
-        }
-
-        //ln
-        if(equation.substr(parentheses - 2, 2) == "ln") {
-            //cout << "ln" << endl;
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
-            return 11;
         }
 
     } // if statement for parentheses
