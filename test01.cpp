@@ -76,7 +76,7 @@ int test10() {
 }
 
 int test11() {
-    derivCal test = derivCal("y=x^sinx", "x");
+    derivCal test = derivCal("y=x^(sin(x))", "x");
     cout << test.solve() << endl;
     return 0;
 }
