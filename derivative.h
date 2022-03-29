@@ -28,9 +28,4 @@ class derivCal
         vector<int> findAddSub(string solution);  // return a vector of the +/- signs in the equation
         int getRule(string equation, string& c, string& u, string& v);         // returns a number corresponding to the derivative rule to be executed
                                               //   using guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
-        bool isPowerRule(string s);           // checks for powerrule
-        bool isSin(string s);                 // checks for sin
-        bool isCos(string s);                 // checks for cos
-        bool isTan(string s);                 // checks for tan
-        bool isSqrt(string s);                // checks for sqrt
 };
