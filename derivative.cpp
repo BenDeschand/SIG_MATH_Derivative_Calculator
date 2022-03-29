@@ -129,6 +129,9 @@ string derivCal::derive(string equation) {
 }
 
 
+// TODO: method for switch statement?
+
+
 // getRule:
 //   return an int corresponding to the derivative rule to be used
 //   guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
@@ -152,10 +155,12 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     // find parentheses
     int parentheses = equation.find('(');  // index of first parentheses
-    // TODO: we do equation.substr(parentheses + 1, equation.find(')') - parentheses - 1)
-    //       so many times, simplify it
 
     if (parentheses != string::npos) {  // there are parentheses
+
+        // TODO: equation.substr(parentheses + 1, equation.find(')') - parentheses - 1)
+        // TODO: what happens if there are parentheses inside the parentheses?
+
         // power rule
         if (equation.substr(parentheses - 1, 1) == "^") {
             c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
@@ -170,7 +175,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             if (equation.substr(parentheses - 4, 4) == "sqrt") {
                 u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
                 // cout << "u: " << u << endl;
-                // TODO: we're dropping parentheses here with y=sqrt(x^(2)) since there's an extra one
+                // TODO: we're dropping parentheses here with y=sqrt(x^(2)) since there's another set inside
                 return 10;
             }
         }
@@ -211,8 +216,10 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             return 15;
         }
 
+        // TODO: what happens if none of these are found before the parentheses?
+
     } else {  // no parentheses
-        // TODO: comment this. what is it doing and why????
+        // TODO: comments. what is this doing and why?
         int varPos = equation.find(var[0]);
         if (varPos >= 0) {
             if (equation.size() > 1) {
@@ -229,6 +236,9 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
     return 0;
 }
+
+
+// TODO: findBeforeParentheses()
 
 
 // findAddSub:
