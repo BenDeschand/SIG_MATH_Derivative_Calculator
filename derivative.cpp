@@ -131,7 +131,7 @@ string derivCal::derive(string equation) {
             //cout << "made it to 9" << endl;
             return c + " * " + u + "^(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
-            cout << "u: " << u << endl;
+            // cout << "u: " << u << endl;
             return "(1/2) * " + derive(u) + "/ sqrt(" + u + ")";
         case 11:  // log(u)
             return derive(u) + " / " + u;
@@ -244,7 +244,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
         // sqrt
         if(parentheses > 3) {
             if(equation.substr(parentheses - 4, 4) == "sqrt") {
-                cout << "sqrt" << endl;
+                // cout << "sqrt" << endl;
                 u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
                 return 10;
             }
