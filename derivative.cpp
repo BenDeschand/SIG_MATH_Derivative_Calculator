@@ -14,26 +14,11 @@ derivCal::derivCal(string equation, string var)
     this->equation = equation;
     this->var = var;
 
-    this->eq = parseString(equation);
-    setEqualsIndex();
-};
-
-void derivCal::setEqualsIndex() {
-    for (int i = 0; i < eq.size(); i++) {
-        if (eq[i] == '=') {
-            equalsIndex = i;
-            return;
-        }
+    equalsIndex = equation.find('=');
+    if (equalsIndex == string::npos) {
+        throw string("no equals sign in equation");
     }
-    // if you get here without finding an equals sign, error
-    throw string("no equals sign in equation");
-}
-
-// getEquation
-// accessor for string equation variable
-string derivCal::getEquation() {
-    return equation;
-}
+};
 
 string derivCal::solve() {
     string ans;
@@ -163,36 +148,6 @@ vector<char> derivCal::parseString(string equation)
     return result;
 };
 
-// getVector
-// accessor for eq
-vector<char> derivCal::getVector()
-{
-    return eq;
-};
-
-// getVar
-// accessor for var
-string derivCal::getVar()
-{
-    return var;
-}
-
-
-
-// getVarIndex
-// find the index of the variable in the equation vector
-int derivCal::getVarIndex() {
-    int index = -1;  // -1 if not found
-    // iterate through vector
-    for (int i = 0; i < eq.size(); i++) {
-        if (eq[i] == var[0]) {
-            // if found break
-            index = i;
-            break;
-        }
-    }
-    return index;
-};
 
 // findAddSub
 // finds the position of every addition and subtraction sign in the given solution
