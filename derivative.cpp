@@ -127,7 +127,7 @@ string derivCal::derive(string equation) {
         case 8:  // u / v
             //cout << "made it to 8" << endl;
             return  "(" + v + " * " + derive(u) + " - " + u + " * " + derive(v) + ") / " + v + "^2";
-        case 9:  // u^c
+        case 9:  // u^(c)
             //cout << "made it to 9" << endl;
             return c + " * " + u + "^(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
@@ -239,6 +239,29 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             return 9;
         }
 
+
+        // sqrt
+        if(equation.substr(parentheses - 4, 4) == "sqrt") {
+            //cout << "tan" << endl;
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 10;
+        }
+
+
+        // log
+        if(equation.substr(parentheses - 3, 3) == "log") {
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 11;
+        }
+
+
+        // exp
+        if(equation.substr(parentheses - 3, 3) == "exp") {
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 12;
+        }
+
+
         //sin
         if(equation.substr(parentheses - 3, 3) == "sin") {
             //cout << "sin" << endl;
@@ -322,10 +345,22 @@ bool derivCal::isCos(string s) {
     }
 	return false;
 }
+
+
 // isTan
 // checks if substring is tan
 bool derivCal::isTan(string s) {
 	if(s.find("tan(") != string::npos) {
+        return true;
+    }
+	return false;
+}
+
+
+// isSqrt
+// checks if substring is sqrt
+bool derivCal::isSin(string s) {
+	if(s.find("sqrt(") != string::npos) {
         return true;
     }
 	return false;
