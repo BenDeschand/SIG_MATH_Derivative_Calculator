@@ -3,6 +3,7 @@
 #include "derivative.h"
 using namespace std;
 
+void printSolveCorrect();
 int test01();
 int test02();
 int test03();
@@ -11,8 +12,14 @@ int test05();
 int test06();
 int test07();
 int test08();
+int test09();
+int test10();
+int test11();
+int test12();
 
 int main() {
+    cout << endl << "----------  DERIVCAL TESTS ----------" << endl << endl;
+
     test01();
     test02();
     test03();
@@ -21,62 +28,88 @@ int main() {
     test06();
     test07();
     test08();
+    test09();
+    test10();
+    test11();
+    test12();
+
+    cout << "----------  DERIVCAL TESTS ----------" << endl << endl;
 }
 
-int test01()
-{
-    cout << "test01: constructor" << endl;
-    derivCal test = derivCal();
-    cout << "\n        constructor worked" << endl;
+void printSolveCorrect(derivCal& test, string correct) {
+   cout << test.getEquation() << endl;
+   cout << "        " << "Solved: " << test.solve() << endl;
+   cout << "        " << "Correct Answer: " << correct << endl << endl;
+}
 
+int test01() {
+    cout << "test01: default constructor" << endl;
+    derivCal test = derivCal();
+
+    assert(test.getEquation() == "No Equation");
+    assert(test.getVar() == "No Var");
+
+    cout << "        " << "assert success" << endl << endl;
     return 0;
 }
 
 int test02() {
-    cout << "test02: getVarIndex()" << endl;
+    cout << "test02: parameterized constructor" << endl;
 	derivCal test = derivCal("y=mx+b", "x");
 
-	int index = test.getVarIndex();
-	assert(index == 3);
+    assert(test.getEquation() == "y=mx+b");
+    assert(test.getVar() == "x");
+    assert(test.getEqualsIndex() == 1);
 
-    cout << "\n        getVarIndex() worked" << endl;
-
+    cout << "        " << "assert success" << endl << endl;
 	return 0;
 }
 
 int test03() {
     derivCal test = derivCal("y=tan(x)/sin(x)", "x");
-    cout << "test03: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
+    string correct = "";
+    cout << "test03: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
 int test04() {
     derivCal test = derivCal("y=2*x^(2)", "x");
-    cout << "test04: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
+    string correct = "";
+    cout << "test04: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
 int test05() {
     derivCal test = derivCal("y=x/sin(x)", "x");
-    cout << "test05: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
+    string correct = "";
+    cout << "test05: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
 int test06() {
     derivCal test = derivCal("y=x*sin(x)", "x");
-    cout << "test06: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
+    string correct = "";
+    cout << "test06: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
 int test07() {
     derivCal test = derivCal("y=sqrt(x^(2))", "x");
-    cout << "test07: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
+    string correct = "";
+    cout << "test07: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
 int test08() {
     derivCal test = derivCal("y=log(2x)", "x");
-    cout << "test08: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
+    string correct = "";
+    cout << "test08: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
@@ -90,7 +123,9 @@ int test10() {
 
 int test11() {
     derivCal test = derivCal("y=x^(sin(x))", "x");
-    cout << test.solve() << endl;
+    string correct = "";
+    cout << "test11: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
 
