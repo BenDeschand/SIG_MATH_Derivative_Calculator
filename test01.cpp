@@ -58,3 +58,27 @@ int test06() {
     cout << test.solve() << endl;
     return 0;
 }
+
+int test07() {
+    return 0;
+}
+
+int test08() {
+    return 0;
+}
+
+int test09() {
+    return 0;
+}
+
+int test10() {
+    return 0;
+}
+
+int test11() {
+    return 0;
+}
+
+int test12() {
+    return 0;
+}
