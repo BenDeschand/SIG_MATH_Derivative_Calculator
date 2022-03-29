@@ -40,31 +40,31 @@ int test02() {
 
 int test03() {
     derivCal test3 = derivCal("y=tan(x)/sin(x)", "x");
-    cout << test3.solve() << endl;
+    cout << "test03: " << test3.solve() << endl;
     return 0;
 }
 
 int test04() {
     derivCal test4 = derivCal("y=2*x^(2)", "x");
-    cout << test4.solve() << endl;
+    cout << "test04: " << test4.solve() << endl;
     return 0;
 }
 
 int test05() {
     derivCal test = derivCal("y=x/sin(x)", "x");
-    cout << test.solve() << endl;
+    cout << "test05: " << test.solve() << endl;
     return 0;
 }
 
 int test06() {
     derivCal test = derivCal("y=x*sin(x)", "x");
-    cout << test.solve() << endl;
+    cout << "test06: " << test.solve() << endl;
     return 0;
 }
 
 int test07() {
     derivCal test = derivCal("y=sqrt(x)", "x");
-    cout << test.solve() << endl;
+    cout << "test07: " << test.solve() << endl;
     return 0;
 }
 
@@ -81,6 +81,8 @@ int test10() {
 }
 
 int test11() {
+    derivCal test = derivCal("y=x^(sin(x))", "x");
+    cout << test.solve() << endl;
     return 0;
 }
 

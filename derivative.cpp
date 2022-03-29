@@ -131,7 +131,7 @@ string derivCal::derive(string equation) {
             //cout << "made it to 9" << endl;
             return c + " * " + u + "^(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
-            cout << "u: " << u << endl;
+            // cout << "u: " << u << endl;
             return "(1/2) * " + derive(u) + "/ sqrt(" + u + ")";
         case 11:  // log(u)
             return derive(u) + " / " + u;
@@ -143,6 +143,8 @@ string derivCal::derive(string equation) {
             return "-sin(" + u + ") * " + derive(u);
         case 15:  // tan(u)
             return "(1 + tan( " + u + ")^2) * " + derive(u);
+        case 16:  //ln(u)
+            return derive(u) + " / " + u;
         default:
             return equation;
     }
@@ -244,7 +246,7 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
         // sqrt
         if(parentheses > 3) {
             if(equation.substr(parentheses - 4, 4) == "sqrt") {
-                cout << "sqrt" << endl;
+                // cout << "sqrt" << endl;
                 u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
                 return 10;
             }
@@ -283,6 +285,21 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 15;
         }
+
+        //log
+        if(equation.substr(parentheses - 3, 3) == "log") {
+            //cout << "log" << endl;
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 11;
+        }
+
+        //ln
+        if(equation.substr(parentheses - 2, 2) == "ln") {
+            //cout << "ln" << endl;
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 11;
+        }
+
     } // if statement for parentheses
     else
     {
