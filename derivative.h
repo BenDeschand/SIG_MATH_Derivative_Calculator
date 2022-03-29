@@ -11,10 +11,9 @@ class derivCal {
     int equalsIndex;   // index of equals sign
 
     // helper methods
-    string derive(string equation);
-    vector<char> parseString(string equation);  // return string equation as vector
-    vector<int> findAddSub(string solution);  // return a vector of the +/- signs in the equation
-    int getRule(string equation, string& c, string& u, string& v); // returns a number corresponding to the derivative rule to be executed using guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
+    string derive(string equation);  // recursive method to find derivative of the equation
+    int getRule(string equation, string& c, string& u, string& v); // choose derivative rule to be used
+    vector<int> findAddSub(string solution);  // find indices of the +/- signs in the equation
 
  public:
     // constructors
