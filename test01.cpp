@@ -25,17 +25,21 @@ int main() {
 
 int test01()
 {
-    derivCal test1 = derivCal();
-    cout << "Worked" << endl;
+    cout << "test01: constructor" << endl;
+    derivCal test = derivCal();
+    cout << "\n        constructor worked" << endl;
 
     return 0;
 }
 
 int test02() {
-	derivCal test2 = derivCal("y=mx+b", "x");
+    cout << "test02: getVarIndex()" << endl;
+	derivCal test = derivCal("y=mx+b", "x");
 
-	int index = test2.getVarIndex();
+	int index = test.getVarIndex();
 	assert(index == 3);
+
+    cout << "\n        getVarIndex() worked" << endl;
 
 	return 0;
 }
@@ -48,7 +52,7 @@ int test03() {
 
 int test04() {
     derivCal test = derivCal("y=2*x^(2)", "x");
-    cout << "test04: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;    
+    cout << "test04: Equation: " << test.getEquation() << "\n        Solved: " << test.solve() << endl;
     return 0;
 }
 
