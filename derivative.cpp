@@ -1,16 +1,14 @@
 #include "derivative.h"
 
-// Default Constructor
-derivCal::derivCal()
-{
+// default constructor
+derivCal::derivCal() {
     equation = "No Equation";
     var = "No Var";
     equalsIndex = -1;
-};
+}
 
-// Overloaded Constructor
-derivCal::derivCal(string equation, string var)
-{
+// parameterized constructor
+derivCal::derivCal(string equation, string var) {
     this->equation = equation;
     this->var = var;
 
@@ -18,19 +16,20 @@ derivCal::derivCal(string equation, string var)
     if (equalsIndex == string::npos) {
         throw string("no equals sign in equation");
     }
-};
+}
 
+
+// solve:
+//   call derive method
+//   TODO: clean equation
 string derivCal::solve() {
     string ans;
     string sub_equation;
 
     // deletes the equal sign from the equation
-    if(equation.find('=') < equation.find(var[0]))
-    {
+    if(equation.find('=') < equation.find(var[0])) {
         sub_equation = equation.substr(equation.find('=') + 1);
-    }
-    else
-    {
+    } else {
         sub_equation = equation.substr(0, equation.find('='));
     }
 
@@ -39,17 +38,15 @@ string derivCal::solve() {
     return ans;
 }
 
-// solve:
-// try all the derivative rules and return a string of the solved equation
-// will return string "error" if something went wrong
-// TODO(Adam): double check recursive logic
+// derive:
+//   try all the derivative rules and return a string of the solved equation
 string derivCal::derive(string equation) {
-    // base case
+    // TODO: base case?
 
-    // check for add sub
-    vector<int> indices = derivCal::findAddSub(equation);
+    // check for +/- signs
+    vector<int> indices = findAddSub(equation);
 
-    // +/- was find, solve each segment
+    // +/- was found, solve each segment
     if (indices.size() > 0) {
         string substring = "";
         for (int i = 0; i < indices.size() + 1; i++) {
@@ -84,13 +81,12 @@ string derivCal::derive(string equation) {
                 // add +/- symbols in between
                 substring += equation[indices[i]];
             }
-        } // for loop
+        } // end for
 
         return substring;
-    } // if statement
+    } // end if
 
-    // TODO: check each rule
-    // TODO: account for constants
+    // TODO: account for constants?
     string c = "c";
     string u = "u";
     string v = "v";
@@ -110,14 +106,11 @@ string derivCal::derive(string equation) {
         case 7:  // u * v
             return  u + " * " + derive(v) + " + " + v + " * " + derive(u);
         case 8:  // u / v
-            //cout << "made it to 8" << endl;
             return  "(" + v + " * " + derive(u) + " - " + u + " * " + derive(v) + ") / " + v + "^2";
         case 9:  // u^(c)
-            //cout << "made it to 9" << endl;
             return c + " * " + u + "^(" + c + " - 1) * " + derive(u);
         case 10:  // sqrt(u)
-            // cout << "u: " << u << endl;
-            return "(1/2) * " + derive(u) + "/ sqrt(" + u + ")";
+            return "(1 / 2) * " + derive(u) + " / sqrt(" + u + ")";
         case 11:  // log(u)
             return derive(u) + " / " + u;
         case 12:  // exp(u)
@@ -128,55 +121,28 @@ string derivCal::derive(string equation) {
             return "-sin(" + u + ") * " + derive(u);
         case 15:  // tan(u)
             return "(1 + tan( " + u + ")^2) * " + derive(u);
-        case 16:  //ln(u)
+        case 16:  // ln(u)
             return derive(u) + " / " + u;
         default:
             return equation;
     }
 }
 
-// parseString
-// parses the string into a vector
-vector<char> derivCal::parseString(string equation)
-{
-    vector<char> result;
-    for(int i = 0; i < equation.length(); i++)
-    {
-        result.push_back(equation[i]);
-    }
 
-    return result;
-};
-
-
-// findAddSub
-// finds the position of every addition and subtraction sign in the given solution
-vector<int> derivCal::findAddSub(string solution)
-{
-    vector<int> result;
-
-    for(int i = 0; i < solution.size(); i++)
-    {
-        if(solution.at(i) == '+' || solution.at(i) == '-')
-        {
-            result.push_back(i);
-        }
-    }
-
-    return result;
-};
-
+// getRule:
+//   return an int corresponding to the derivative rule to be used
+//   guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
     //cout << "equation: " << equation << endl;
 
-    // find multi (Adam)
+    // find multiplication sign
     if (equation.find("*") != string::npos) {
         u = equation.substr(0, equation.find('*'));
         v = equation.substr(equation.find('*') + 1);
         return 7;
     }
 
-    // find division (Ben)
+    // find division sign
     if(equation.find('/') != string::npos) {
         //cout << "found division" << endl;
         u = equation.substr(0, equation.find('/'));
@@ -184,25 +150,27 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
         return 8;
     }
 
-    // find parentheses (Dylan) MESSAGE FROM DYLAN: "Lemme know if these are okay before i do more of em, thanks"
-    int parentheses = equation.find('(');  //index of first parentheses
-    // cout << "parentheses: " << parentheses << endl;
-    if(parentheses >= 0) {
-        //pow
+    // find parentheses
+    int parentheses = equation.find('(');  // index of first parentheses
+    // TODO: we do equation.substr(parentheses + 1, equation.find(')') - parentheses - 1)
+    //       so many times, simplify it
+
+    if(parentheses != string::npos) {  // there are parentheses
+        // power rule
         if(equation.substr(parentheses - 1, 1) == "^") {
-            c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); //prolly the right amount idk
+            c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             u = equation.substr(0, equation.find('^'));
-            //cout << u << endl;
-            //cout << c << endl;
+            // cout << "c: " << c << endl;
+            // cout << "u: " << u << endl;
             return 9;
         }
-
 
         // sqrt
         if(parentheses > 3) {
             if(equation.substr(parentheses - 4, 4) == "sqrt") {
-                // cout << "sqrt" << endl;
                 u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+                // cout << "u: " << u << endl;
+                // TODO: we're dropping parentheses here with y=sqrt(x^(2)) since there's an extra one
                 return 10;
             }
         }
@@ -213,14 +181,11 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             return 11;
         }
 
-
-         //ln
+         // ln (same as log)
         if(equation.substr(parentheses - 2, 2) == "ln") {
-            //cout << "ln" << endl;
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 11;
         }
-
 
         // exp
         if(equation.substr(parentheses - 3, 3) == "exp") {
@@ -228,52 +193,54 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             return 12;
         }
 
-
-        //sin
+        // sin
         if(equation.substr(parentheses - 3, 3) == "sin") {
-            // cout << "sin" << endl;
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); //-4 for the "sin(" and -1 for the ")".
-            return 13;                                              //didn't do the math, didnt test it, hope it works
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); // -4 for the "sin(" and -1 for the ")".
+            return 13;
         }
 
-        //cos
+        // cos
         if(equation.substr(parentheses - 3, 3) == "cos") {
-            u = equation.substr(parentheses, equation.size() - 5);
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 14;
         }
 
-        //tan
+        // tan
         if(equation.substr(parentheses - 3, 3) == "tan") {
-            // cout << "tan" << endl;
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 15;
         }
 
-    } // if statement for parentheses
-    else
-    {
+    } else {  // no parentheses
+        // TODO: comment this. what is it doing and why????
         int varPos = equation.find(var[0]);
-        if(varPos >= 0)
-        {
+        if(varPos >= 0) {
             if(equation.size() > 1) {
                 c = equation.substr(0, varPos);
                 return 2;
-            }
-            else
-            {
+            } else {
                 c = "1";
                 return 2;
             }
-        }
-        else
-        {
+        } else {
             return 1;
         }
     }
 
-
-
-        // use functions already made
-
     return 0;
 }
+
+
+// findAddSub:
+//   finds the position of every addition and subtraction sign in the given solution
+vector<int> derivCal::findAddSub(string solution) {
+    vector<int> indices;
+
+    for(int i = 0; i < solution.size(); i++) {
+        if(solution.at(i) == '+' || solution.at(i) == '-') {
+            indices.push_back(i);
+        }
+    }
+
+    return indices;
+};
