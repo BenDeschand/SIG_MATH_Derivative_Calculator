@@ -143,6 +143,8 @@ string derivCal::derive(string equation) {
             return "-sin(" + u + ") * " + derive(u);
         case 15:  // tan(u)
             return "(1 + tan( " + u + ")^2) * " + derive(u);
+        case 16:  //ln(u)
+            return derive(u) + " / " + u;
         default:
             return equation;
     }
@@ -283,6 +285,21 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
             return 15;
         }
+
+        //log
+        if(equation.substr(parentheses - 3, 3) == "log") {
+            //cout << "log" << endl;
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 11;
+        }
+
+        //ln
+        if(equation.substr(parentheses - 2, 2) == "ln") {
+            //cout << "ln" << endl;
+            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            return 11;
+        }
+
     } // if statement for parentheses
     else
     {
