@@ -130,5 +130,9 @@ int test11() {
 }
 
 int test12() {
+    derivCal test = derivCal("y=log(x)", "x");
+    string correct = "";
+    cout << "test12: ";
+    printSolveCorrect(test, correct);
     return 0;
 }
