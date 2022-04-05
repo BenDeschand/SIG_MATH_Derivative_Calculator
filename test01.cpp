@@ -67,7 +67,7 @@ int test02() {
 
 int test03() {
     derivCal test = derivCal("y=tan(x)/sin(x)", "x");
-    string correct = "";
+    string correct = "dy/dx = (sec(x)^(2) * sin(x) - tan(x) * cos(x)) / sin(x)^(2)";
     cout << "test03: ";
     printSolveCorrect(test, correct);
     return 0;
@@ -75,7 +75,7 @@ int test03() {
 
 int test04() {
     derivCal test = derivCal("y=2*x^(2)", "x");
-    string correct = "";
+    string correct = "4x";
     cout << "test04: ";
     printSolveCorrect(test, correct);
     return 0;
@@ -83,7 +83,7 @@ int test04() {
 
 int test05() {
     derivCal test = derivCal("y=x/sin(x)", "x");
-    string correct = "";
+    string correct = "(sin(x)- x * cos(x)) / sin(x)^(2)";
     cout << "test05: ";
     printSolveCorrect(test, correct);
     return 0;
@@ -91,7 +91,7 @@ int test05() {
 
 int test06() {
     derivCal test = derivCal("y=x*sin(x)", "x");
-    string correct = "";
+    string correct = "sin(x) + x * cos(x)";
     cout << "test06: ";
     printSolveCorrect(test, correct);
     return 0;
@@ -99,7 +99,7 @@ int test06() {
 
 int test07() {
     derivCal test = derivCal("y=sqrt(x^(2))", "x");
-    string correct = "";
+    string correct = "x / abs(x)";
     cout << "test07: ";
     printSolveCorrect(test, correct);
     return 0;
@@ -107,7 +107,7 @@ int test07() {
 
 int test08() {
     derivCal test = derivCal("y=log(2x)", "x");
-    string correct = "";
+    string correct = "1 / x";
     cout << "test08: ";
     printSolveCorrect(test, correct);
     return 0;
@@ -123,7 +123,7 @@ int test10() {
 
 int test11() {
     derivCal test = derivCal("y=x^(sin(x))", "x");
-    string correct = "";
+    string correct = "x^(sin(x)) (sin(x)/x + cos(x) * ln(x))";
     cout << "test11: ";
     printSolveCorrect(test, correct);
     return 0;
