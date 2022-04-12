@@ -16,6 +16,8 @@ int test09();
 int test10();
 int test11();
 int test12();
+int test13();
+int test14();
 
 int main() {
     cout << endl << "----------  DERIVCAL TESTS ----------" << endl << endl;
@@ -32,6 +34,8 @@ int main() {
     test10();
     test11();
     test12();
+    test13();
+    test14();
 
     cout << "----------  DERIVCAL TESTS ----------" << endl << endl;
 }
@@ -133,6 +137,22 @@ int test12() {
     derivCal test = derivCal("y=sin(x^(2))+cos(x^(2))", "x");
     string correct = "2x * cos(x^(2)) - 2x * sin(x^(2))";
     cout << "test12: ";
+    printSolveCorrect(test, correct);
+    return 0;
+}
+
+int test13() {
+    derivCal test = derivCal("y=2x+3", "x");
+    string correct = "m";
+    cout << "test13: ";
+    printSolveCorrect(test, correct);
+    return 0;
+}
+
+int test14() {
+    derivCal test = derivCal("y=x+x^(2)", "x");
+    string correct = "1 + 2 * x";
+    cout << "test14: ";
     printSolveCorrect(test, correct);
     return 0;
 }
