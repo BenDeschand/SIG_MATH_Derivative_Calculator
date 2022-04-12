@@ -82,7 +82,7 @@ string derivCal::derive(string equation) {
             substring += derive(segment);
             if (i != indices.size()) {
                 // add +/- symbols in between
-                substring += equation[indices[i]];
+                substring = substring + " " + equation[indices[i]] + " ";
             }
         } // end for
 
