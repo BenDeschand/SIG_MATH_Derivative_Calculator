@@ -220,6 +220,14 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
             return 15;
         }
 
+        if (equation.substr(parentheses - 1, 1) == "^") {
+        	c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+        	u = equation.substr(0, equation.find('^'));
+        	//cout << u << endl;
+        	//cout << c << endl;
+        	return 9;
+        }
+
         // TODO: what happens if none of these are found before the parentheses?
 
     } else {  // no parentheses
