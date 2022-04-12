@@ -114,10 +114,22 @@ int test08() {
 }
 
 int test09() {
+
+    derivCal test = derivCal("y=log(x^(2))", "x");
+    string correct = "2 / x";
+    cout << "test09: ";
+    printSolveCorrect(test, correct);
+
     return 0;
 }
 
 int test10() {
+
+    derivCal test = derivCal("y=sin(x)/cos(x)", "x");
+    string correct = "1/cos(x)^2";
+    cout << "test10: ";
+    printSolveCorrect(test, correct);
+
     return 0;
 }
 
