@@ -52,40 +52,44 @@ string derivCal::derive(string equation) {
         for (int i = 0; i < indices.size() + 1; i++) {
             // EX: indicies.size() == 2
             //   indices = [6, 9]
-            //   y=4x^2+3x+2
+            //   4x^2+3x+2
             //   two +/- signs = 3 segments
             int left, right;
             if (i == 0) {
                 // first segment
-                // equalsIndex to indices[i]
-                left = equalsIndex;
+                // beginning to indices[i]
+                left = 0;
                 right = indices[i];
             } else if (i == indices.size()) {
                 // last segment
-                // indices[i-1] to end
-                left = indices[i-1];
-                right = indices.size();
+                // indices[i-1] + 1 to end
+                left = indices[i - 1] + 1;
+                right = equation.size();
             } else {
                 // middle segment
-                // indices[i-1] to indices[i]
-                left = indices[i-1];
+                // indices[i-1] + 1 to indices[i]
+                left = indices[i-1] + 1;
                 right = indices[i];
             }
-
-            int length = right - left - 1;
-            string segment = equation.substr(left + 1, length);
-            //cout << "segment: " << segment << endl;  // DEBUG
+            // cout << "equation: " << equation << endl;
+            // cout << "left: " << left << " right: " << right << endl;
+            // left is index of first character we want
+            // right is index of last character + 1
+            int length = right - left;
+            string segment = equation.substr(left, length);
+            // cout << "segment: " << segment << endl;  // DEBUG
 
             substring += derive(segment);
             if (i != indices.size()) {
                 // add +/- symbols in between
-                substring += equation[indices[i]];
+                substring = substring + " " + equation[indices[i]] + " ";
             }
         } // end for
 
         return substring;
     } // end if
 
+    //cout << "equation: " << equation << endl;
     // TODO: account for constants?
     string c = "c";
     string u = "u";
@@ -116,8 +120,10 @@ string derivCal::derive(string equation) {
         case 12:  // exp(u)
             return "exp(" + u + ") * " + derive(u);
         case 13:  // sin(u)
+            //cout << "sin u: " << u << endl;
             return "cos(" + u + ") * " + derive(u);
         case 14:  // cos(u)
+            //cout << "cos u: " << u << endl;
             return "-sin(" + u + ") * " + derive(u);
         case 15:  // tan(u)
             return "(1 + tan( " + u + ")^2) * " + derive(u);
@@ -136,7 +142,7 @@ string derivCal::derive(string equation) {
 //   return an int corresponding to the derivative rule to be used
 //   guide at https://www.cs.utexas.edu/users/novak/asg-symdif.html
 int derivCal::getRule(string equation, string& c, string& u, string& v) {
-    // cout << "equation: " << equation << endl;
+     //cout << "Rule equation: " << equation << endl;
 
     // find multiplication sign
     if (equation.find("*") != string::npos) {
@@ -163,17 +169,17 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
         // power rule
         if (equation.substr(parentheses - 1, 1) == "^") {
-            c = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            c = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
             u = equation.substr(0, equation.find('^'));
-            // cout << "c: " << c << endl;
-            // cout << "u: " << u << endl;
+            //  cout << "c: " << c << endl;
+            //  cout << "u: " << u << endl;
             return 9;
         }
 
         // sqrt
         if (parentheses > 3) {
             if (equation.substr(parentheses - 4, 4) == "sqrt") {
-                u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+                u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
                 // cout << "u: " << u << endl;
                 // TODO: we're dropping parentheses here with y=sqrt(x^(2)) since there's another set inside
                 return 10;
@@ -182,37 +188,37 @@ int derivCal::getRule(string equation, string& c, string& u, string& v) {
 
         // log
         if (equation.substr(parentheses - 3, 3) == "log") {
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
             return 11;
         }
 
          // ln (same as log)
         if (equation.substr(parentheses - 2, 2) == "ln") {
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
             return 11;
         }
 
         // exp
         if (equation.substr(parentheses - 3, 3) == "exp") {
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
             return 12;
         }
 
         // sin
         if (equation.substr(parentheses - 3, 3) == "sin") {
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1); // -4 for the "sin(" and -1 for the ")".
+            u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1); // -4 for the "sin(" and -1 for the ")".
             return 13;
         }
 
         // cos
         if (equation.substr(parentheses - 3, 3) == "cos") {
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
             return 14;
         }
 
         // tan
         if (equation.substr(parentheses - 3, 3) == "tan") {
-            u = equation.substr(parentheses + 1, equation.find(')') - parentheses - 1);
+            u = equation.substr(parentheses + 1, equation.find_last_of(')') - parentheses - 1);
             return 15;
         }
 
