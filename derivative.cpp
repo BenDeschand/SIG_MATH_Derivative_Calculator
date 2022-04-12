@@ -52,27 +52,29 @@ string derivCal::derive(string equation) {
         for (int i = 0; i < indices.size() + 1; i++) {
             // EX: indicies.size() == 2
             //   indices = [6, 9]
-            //   y=4x^2+3x+2
+            //   4x^2+3x+2
             //   two +/- signs = 3 segments
             int left, right;
             if (i == 0) {
                 // first segment
-                // equalsIndex to indices[i]
+                // beginning to indices[i]
                 left = 0;
                 right = indices[i];
             } else if (i == indices.size()) {
                 // last segment
-                // indices[i-1] to end
+                // indices[i-1] + 1 to end
                 left = indices[i - 1] + 1;
                 right = equation.size();
             } else {
                 // middle segment
-                // indices[i-1] to indices[i]
+                // indices[i-1] + 1 to indices[i]
                 left = indices[i-1] + 1;
                 right = indices[i];
             }
             // cout << "equation: " << equation << endl;
             // cout << "left: " << left << " right: " << right << endl;
+            // left is index of first character we want
+            // right is index of last character + 1
             int length = right - left;
             string segment = equation.substr(left, length);
             // cout << "segment: " << segment << endl;  // DEBUG
